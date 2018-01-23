@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <!-- 使用注解暴露接口 -->
+    <dubbo:annotation package="org.frend" />
+    <!-- 提供方应用名称信息 -->
+    <dubbo:application name="${rpc.application.name}"></dubbo:application>
+
+    <dubbo:registry protocol="zookeeper" address="${rpc.zookeeper.server}" check="false" subscribe="false" register="" />
+
+    <dubbo:protocol name="dubbo" port="-1" serialization="java" dispatcher="all" threadpool="fixed" threads="300" accepts="2000" />
+
+    <!-- 加入spring注解扫描 -->
+    <context:component-scan base-package="org.frend" />
+</beans>
